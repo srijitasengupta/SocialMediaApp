@@ -1,2 +1,2 @@
 # SocialMediaApp
-Description
+Social Media App for travel enthusiasts.
