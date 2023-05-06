@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterComponent {
   email : string = '';
   password : string = '';
+  path : any;
 
   constructor(private auth : AuthService) { }
 
@@ -27,10 +29,19 @@ export class RegisterComponent {
       return;
     }
 
-    this.auth.register(this.email,this.password);
+    this.auth.register(this.email,this.password, this.path);
 
     this.email = '';
     this.password = '';
 
   }
+
+  upload(event: any) {
+    this.path = event.target.files[0];
+  }
+
+  // uploadImage() {
+  //   console.log(this.path);
+  //   this.auth.uploadImage(this.path);
+  // }
 }

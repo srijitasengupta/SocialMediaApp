@@ -16,6 +16,13 @@
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control" name="password" [(ngModel)]="password">
                       </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="Image">Uplad Image</label>
+                          <input type="file" (change)="upload($event)" accept="*.png.jpg" id="">
+                        </div>
+                      </div>
+                      <br>
                       <button type="button" class="btn btn-info" (click)="register()">Register</button>
                       <div class="row">
                           <div class="col-md-6">
