@@ -1,6 +1,11 @@
 <h1>Explore your Community</h1>
 <a href="javascript: void(0)" (click)="onClickMyProfile($event)">My Profile</a>
 <div class="user-list">
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search by name">
+    <button (click)="search()">Search</button>
+  </div>
+  <br>
   <ul>
     <li *ngFor="let user of usersList">
       <img [src]="user.Data.photoUrl" alt="User Image">

@@ -11,6 +11,25 @@ h1 {
   padding: 20px;
   font-family: Arial, sans-serif;
 }
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-container input[type="text"] {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.search-container button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .user-list ul {
   list-style: none;
   padding: 0;

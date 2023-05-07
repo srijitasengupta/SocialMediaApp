@@ -12,18 +12,34 @@ import { environment } from 'src/environments/environment';
 export class CommunityService {
   app = initializeApp(environment.firebase);
   db = getFirestore(this.app);
-  users : User[] = [];
+  users: User[] = [];
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
-  async getAllUsers() : Promise<User[]> {
+  async getAllUsers(): Promise<User[]> {
+    this.users =[];
     const querySnapshot = await getDocs(collection(this.db, "users"));
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
+
+      if(doc.id != localStorage.getItem('activeUser')) {
       let user = new User();
       user.id = doc.id;
       user.Data = doc.data();
       this.users.push(user);
-      console.log("aaaaaaaa",user,this.users);
+      }
+    });
+    return this.users;
+  }
+
+  async getUserByName(searchTerm: string): Promise<User[]> {
+    this.users =[];
+    const usersRef = collection(this.db, "users");
+    const q = query(usersRef, where("Name", "==", searchTerm));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+        let user = new User();
+        user.id = doc.id;
+        user.Data = doc.data();
     });
     return this.users;
   }
