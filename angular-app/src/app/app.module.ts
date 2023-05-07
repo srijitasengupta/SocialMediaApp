@@ -10,6 +10,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { FormsModule } from '@angular/forms';
 import {AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { CommunityComponent } from './components/community/community.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {AngularFireStorageModule } from '@angular/fire/compat/storage';
     LoginComponent,
     RegisterComponent,
     FeedComponent,
+    CommunityComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+<h1>Explore your Community</h1>
+<div class="user-list">
+  <ul>
+    <li *ngFor="let user of usersList">
+      <img [src]="user.Data.photoUrl" alt="User Image">
+      <div class="user-info">
+        <div class="user-name">{{ user.Data.Name }}</div>
+        <div class="user-bio">{{ user.Data.Bio }}</div>
+      </div>
+    </li>
+</ul>
+</div>

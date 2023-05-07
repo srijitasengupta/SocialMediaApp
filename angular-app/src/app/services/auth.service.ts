@@ -23,7 +23,7 @@ export class AuthService {
   login(email: string, password: string) {
     this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
       localStorage.setItem('token', 'true');
-      this.router.navigate(['/my-feed']);
+      this.router.navigate(['/community']);
 
     }, err => {
       alert(err.message);
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   // register method
-  async register(email: string, password: string, file: any) {
+  async register(email: string, password: string, file: any,dob: any, name: string) {
     try {
       const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
 
@@ -42,7 +42,9 @@ export class AuthService {
       const data = {
         Bio: 'Love this journey for me',
         Followers: 0,
-        photoUrl: downloadUrl
+        photoUrl: downloadUrl,
+        Name: name,
+        Dob: dob
       };
 
       const collectionRef: CollectionReference<DocumentData> = collection(this.db, "users")
@@ -50,7 +52,7 @@ export class AuthService {
       await setDoc(docRef, data);
 
       alert('Registration Successful');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/community']);
     } catch (err) {
       alert(err);
       this.router.navigate(['/register']);
@@ -65,13 +67,6 @@ export class AuthService {
     }, err => {
       alert(err.message);
     })
-  }
-
-  async getAllUsers() {
-    const querySnapshot = await getDocs(collection(this.db, "users"));
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-    });
   }
 
   async uploadImage(file: any, userId: any): Promise<string> {

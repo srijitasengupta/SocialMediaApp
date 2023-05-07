@@ -10,6 +10,8 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 export class RegisterComponent {
   email : string = '';
   password : string = '';
+  name: string = '';
+  dob: any ;
   path : any;
 
   constructor(private auth : AuthService) { }
@@ -29,7 +31,7 @@ export class RegisterComponent {
       return;
     }
 
-    this.auth.register(this.email,this.password, this.path);
+    this.auth.register(this.email,this.password, this.path, this.dob,this.name);
 
     this.email = '';
     this.password = '';

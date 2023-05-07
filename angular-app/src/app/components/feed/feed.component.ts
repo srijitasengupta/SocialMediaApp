@@ -13,6 +13,5 @@ export class FeedComponent {
   constructor(private auth : AuthService ) {};
 
   ngOnInit() : void {
-    this.auth.getAllUsers();
   }
 }

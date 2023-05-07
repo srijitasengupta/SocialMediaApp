@@ -9,6 +9,14 @@
                           <h4 class="text-dark text-muted">Register</h4>
                       </div>
                       <div class="mb-3">
+                        <label for="Name" class="form-label">Name</label>
+                        <input type="name" class="form-control" name="name" [(ngModel)]="name">
+                      </div>
+                      <div class="mb-3">
+                        <label for="Date Of Birth" class="form-label">Date Of Birth</label>
+                        <input type="date" class="form-control" name="dob" [(ngModel)]="dob">
+                      </div>
+                      <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" [(ngModel)]="email">
                       </div>

@@ -1,0 +1,55 @@
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.user-list {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+.user-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-list li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.user-list li img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-list li .user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-list li .user-name {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.user-list li .user-bio {
+  font-size: 14px;
+  color: #777;
+}
+
+
+
+
+
+
