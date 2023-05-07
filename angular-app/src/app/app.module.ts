@@ -11,7 +11,8 @@ import { FeedComponent } from './components/feed/feed.component';
 import { FormsModule } from '@angular/forms';
 import {AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { CommunityComponent } from './components/community/community.component';
-
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { User } from './model/user.model';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +20,7 @@ import { CommunityComponent } from './components/community/community.component';
     RegisterComponent,
     FeedComponent,
     CommunityComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,9 @@ import { CommunityComponent } from './components/community/community.component';
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    User
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

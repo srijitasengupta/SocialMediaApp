@@ -8,101 +8,110 @@ import { environment } from 'src/environments/environment';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
 
-  imgUrl: any;
 
-  app = initializeApp(environment.firebase);
-  db = getFirestore(this.app);
+    app = initializeApp(environment.firebase);
+    db = getFirestore(this.app);
 
-  constructor(private fireauth: AngularFireAuth, private router: Router) { }
+    constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
-  // login method
-  login(email: string, password: string) {
-    this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
-      localStorage.setItem('token', 'true');
-      this.router.navigate(['/community']);
+    // login method
+    async login(email: string, password: string) {
+        try {
+            const res = await this.fireauth.signInWithEmailAndPassword(email, password);
 
-    }, err => {
-      alert(err.message);
-      this.router.navigate(['/login']);
-    })
-  }
+            let userid = res.user?.uid.toString();
+            const collectionRef: CollectionReference<DocumentData> = collection(this.db, "users")
+            const docRef = doc(collectionRef, userid);
 
-  // register method
-  async register(email: string, password: string, file: any,dob: any, name: string) {
-    try {
-      const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
-
-      const userid = res.user?.uid.toString();
-      const downloadUrl = await this.uploadImage(file, userid);
-
-      const data = {
-        Bio: 'Love this journey for me',
-        Followers: 0,
-        photoUrl: downloadUrl,
-        Name: name,
-        Dob: dob
-      };
-
-      const collectionRef: CollectionReference<DocumentData> = collection(this.db, "users")
-      const docRef = doc(collectionRef, userid);
-      await setDoc(docRef, data);
-
-      alert('Registration Successful');
-      this.router.navigate(['/community']);
-    } catch (err) {
-      alert(err);
-      this.router.navigate(['/register']);
-    }
-  }
-
-  // sign out
-  logout() {
-    this.fireauth.signOut().then(() => {
-      localStorage.removeItem('token');
-      this.router.navigate(['/login']);
-    }, err => {
-      alert(err.message);
-    })
-  }
-
-  async uploadImage(file: any, userId: any): Promise<string> {
-    const storage = getStorage();
-    const storageRef = ref(storage, 'images/' + userId + '.jpg');
-
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    return new Promise<string>((resolve, reject) => {
-      uploadTask.on('state_changed',
-        (snapshot) => {
-
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + progress + '% done');
-          switch (snapshot.state) {
-            case 'paused':
-              console.log('Upload is paused');
-              break;
-            case 'running':
-              console.log('Upload is running');
-              break;
-          }
-        },
-        (error) => {
-          alert(error);
-          reject(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log('File available at', downloadURL);
-            resolve(downloadURL);
-          });
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                console.log(docSnap.data());
+                localStorage.setItem('activeUser',docSnap.id);
+            }
+            alert('Login Successful!');
+            this.router.navigate(['/community']);
+        } catch (err) {
+            alert(err);
+            this.router.navigate(['/register']);
         }
-      );
-    });
-  }
+    }
+
+    // register method
+    async register(email: string, password: string, file: any, dob: any, name: string) {
+        try {
+            const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
+
+            const userid = res.user?.uid.toString();
+            const downloadUrl = await this.uploadImage(file, userid);
+
+            const data = {
+                Bio: 'Love this journey for me',
+                Followers: 0,
+                photoUrl: downloadUrl,
+                Name: name,
+                Dob: dob
+            };
+
+            const collectionRef: CollectionReference<DocumentData> = collection(this.db, "users")
+            const docRef = doc(collectionRef, userid);
+            await setDoc(docRef, data);
+
+            alert('Registration Successful');
+            this.router.navigate(['/community']);
+        } catch (err) {
+            alert(err);
+            this.router.navigate(['/register']);
+        }
+    }
+
+    // sign out
+    logout() {
+        this.fireauth.signOut().then(() => {
+            localStorage.removeItem('token');
+            this.router.navigate(['/login']);
+        }, err => {
+            alert(err.message);
+        })
+    }
+
+    async uploadImage(file: any, userId: any): Promise<string> {
+        const storage = getStorage();
+        const storageRef = ref(storage, 'images/' + userId + '.jpg');
+
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        return new Promise<string>((resolve, reject) => {
+            uploadTask.on('state_changed',
+                (snapshot) => {
+
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                    switch (snapshot.state) {
+                        case 'paused':
+                            console.log('Upload is paused');
+                            break;
+                        case 'running':
+                            console.log('Upload is running');
+                            break;
+                    }
+                },
+                (error) => {
+                    alert(error);
+                    reject(error);
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        console.log('File available at', downloadURL);
+                        resolve(downloadURL);
+                    });
+                }
+            );
+        });
+    }
 
 
 }

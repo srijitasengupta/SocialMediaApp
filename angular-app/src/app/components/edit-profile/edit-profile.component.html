@@ -1,0 +1,28 @@
+<h1>My Profile</h1>
+<div *ngIf="showResult">
+    
+                        
+        <img height="50" width="50" [src]="user.Data?.photoUrl" alt="User Image">
+        <input type="file" (change)="upload($event)" accept="*.png.jpg" id="">
+        <div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" [(ngModel)]="user.Data.Name">
+              </div>
+              <!-- <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" [(ngModel)]="user.Data.Email">
+              </div> -->
+              <div class="mb-3">
+                <label for="dob" class="form-label">DOB</label>
+                <input readonly="true" type="date" class="form-control" name="dob" [(ngModel)]="user.Data.Dob">
+              </div>
+              <div class="mb-3">
+                <label for="Bio" class="form-label">Bio</label>
+                <input type="text" class="form-control" name="bio" [(ngModel)]="user.Data.Bio">
+              </div>
+         
+        </div>
+        <button class="btn btn-lg btn-warning" (click)="save(user)">Save</button>
+      
+  </div>
