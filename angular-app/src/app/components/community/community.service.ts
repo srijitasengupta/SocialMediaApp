@@ -40,6 +40,7 @@ export class CommunityService {
         let user = new User();
         user.id = doc.id;
         user.Data = doc.data();
+        this.users.push(user);
     });
     return this.users;
   }
