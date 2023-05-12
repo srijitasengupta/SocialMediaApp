@@ -1,1 +1,12 @@
-<p>feed works!</p>
+<h1>My Feed</h1>
+<button class="btn btn-success" (click)="onCLickCreatePost()">Create Post</button>
+<div class="container">
+    <ng-container *ngFor="let post of postsList;">
+        <div>{{post.Data?.Caption}}</div>
+        <div>{{post.Data?.Likes}}</div>
+        <div>{{post.Data.PhotoUrl}}</div>
+        <img height="50" width="50" [src]="post.Data.PhotoUrl" alt="User Image">
+        <button class="btn btn-sm btn-warning" (click)="onCLickEditPost(post)">Edit Post</button>
+    </ng-container>
+    
+</div>

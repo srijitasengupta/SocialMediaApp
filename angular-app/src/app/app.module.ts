@@ -15,6 +15,8 @@ import { CommunityComponent } from './components/community/community.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { User } from './model/user.model';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { Post } from './model/post.model';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +26,7 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
     CommunityComponent,
     EditProfileComponent,
     UserDetailComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
     BrowserAnimationsModule
   ],
   providers: [
-    User
+    User,
+    Post
   ],
   bootstrap: [AppComponent]
 })

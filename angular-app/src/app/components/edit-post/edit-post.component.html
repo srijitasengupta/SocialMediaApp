@@ -1,0 +1,21 @@
+<h1>My Profile</h1>
+<div *ngIf="showResult">
+    
+                        
+        
+        <div>
+            <div class="mb-3">
+                <textarea name="caption" id="caption" cols="30" rows="10" [(ngModel)]="post.Caption"></textarea>
+            </div>
+            <div class="mb-3">
+                <img height="50" width="50" [src]="post.PhotoUrl" alt="User Image">
+                <input type="file" (change)="upload($event)" accept="*.png.jpg" id="">
+        
+            </div>
+              
+              
+         
+        </div>
+        <button class="btn btn-lg btn-warning" (click)="save(post)">Save</button>
+      
+  </div>
