@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, setDoc, CollectionReference, query, where, getDocs, getDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, CollectionReference, query, where, getDocs, getDoc, DocumentData } from "firebase/firestore";
 import { User } from 'src/app/model/user.model';
 import { environment } from 'src/environments/environment';
 
@@ -44,4 +44,5 @@ export class CommunityService {
     });
     return this.users;
   }
+
 }

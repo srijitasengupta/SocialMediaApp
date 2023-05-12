@@ -7,4 +7,5 @@ export class User {
   Bio : any;
   Followers: any;
   PhotoUrl: any;
+  Following: [] = [];
 }

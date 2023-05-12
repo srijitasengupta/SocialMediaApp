@@ -12,7 +12,12 @@
       <div class="user-info">
         <div class="user-name">{{ user.Data.Name }}</div>
         <div class="user-bio">{{ user.Data.Bio }}</div>
+        <button (click)="showDialog(user)" label="Show">See User</button>
       </div>
     </li>
 </ul>
 </div>
+
+<p-dialog header="Header" [(visible)]="visible" [style]="{width: '50vw','background-color': '#a19787'}" [styleClass]="'custom-dialog'">
+  <app-user-detail [user]="user"></app-user-detail>
+</p-dialog>

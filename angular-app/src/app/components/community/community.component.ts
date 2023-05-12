@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 export class CommunityComponent {
   usersList: any[] = [];
   searchTerm: string = '';
+  visible: boolean = false;
+  user: any;
   constructor(private auth: AuthService, private communityService: CommunityService,private router: Router) { };
 
   ngOnInit(): void {
@@ -36,5 +38,14 @@ export class CommunityComponent {
 
   onClickMyProfile($event: any){
     this.router.navigate(['/edit-profile',localStorage.getItem('activeUser')]);
+  }
+
+  showDialog(user: any){
+    this.visible=true;
+    this.user = user;
+  }
+
+  updateCuurentUser() {
+    console.log("sssss",this.user);
   }
 }

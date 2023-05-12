@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { DialogModule } from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AngularFireModule} from '@angular/fire/compat'
@@ -13,6 +14,7 @@ import {AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { CommunityComponent } from './components/community/community.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { User } from './model/user.model';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,12 +23,15 @@ import { User } from './model/user.model';
     FeedComponent,
     CommunityComponent,
     EditProfileComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
+    DialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
     User

@@ -53,7 +53,8 @@ export class AuthService {
                 Followers: 0,
                 photoUrl: downloadUrl,
                 Name: name,
-                Dob: dob
+                Dob: dob,
+                Following: []
             };
 
             const collectionRef: CollectionReference<DocumentData> = collection(this.db, "users")
