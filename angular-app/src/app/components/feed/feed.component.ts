@@ -26,7 +26,7 @@ export class FeedComponent {
 
 	ngOnInit(): void {
 
-		
+
 		 this.id = localStorage.getItem('activeUser')?.toString();
 
 		if(this.id!=null)
@@ -35,12 +35,12 @@ export class FeedComponent {
 		setTimeout(() => {
 			this.getPosts();
 		}, 1000);
-		
+
 	}
 
 	getUserByID(id: string){
 		this.editProfileService.getUserByID(id).then(res => {
-	
+
 		  this.user.id = res.id;
 		  this.user.Data = res.data();
 		  console.log(this.user.Data.Following)
@@ -53,7 +53,7 @@ export class FeedComponent {
 	  }
 
 	getPosts(){
-		
+
 		this.userList.push(this.id);
 		console.log(this.userList)
 		this.feedService.getPosts(this.userList).then(res => {
@@ -62,7 +62,7 @@ export class FeedComponent {
 		},err => {
 			alert("error occured")
 		})
-		  
+
 	}
 	onCLickCreatePost(){
 		this.router.navigate(['/edit-post','0'])
@@ -71,7 +71,9 @@ export class FeedComponent {
 	onCLickEditPost(post: any){
 		this.router.navigate(['/edit-post', post.ID])
 	}
-	
 
+  onCLickViewPost(post: any){
+    this.router.navigate(['/view-post', post.ID])
+  }
 
 }

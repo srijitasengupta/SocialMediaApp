@@ -16,7 +16,9 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { User } from './model/user.model';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { Post } from './model/post.model';
+import { Comment } from './model/comment.model';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { ViewPostComponent } from './components/view-post/view-post.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
     CommunityComponent,
     EditProfileComponent,
     UserDetailComponent,
-    EditPostComponent
+    EditPostComponent,
+    ViewPostComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
   ],
   providers: [
     User,
-    Post
+    Post,
+    Comment,
   ],
   bootstrap: [AppComponent]
 })

@@ -6,6 +6,7 @@ import { getFirestore, collection, doc, setDoc, CollectionReference, query, wher
 import type { DocumentData } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { User } from '../model/user.model';
 
 @Injectable({
     providedIn: 'root'
@@ -31,6 +32,8 @@ export class AuthService {
             if (docSnap.exists()) {
                 console.log(docSnap.data());
                 localStorage.setItem('activeUser',docSnap.id);
+                let user = new User();
+                user.Data =docSnap.data();
             }
             alert('Login Successful!');
             this.router.navigate(['/community']);

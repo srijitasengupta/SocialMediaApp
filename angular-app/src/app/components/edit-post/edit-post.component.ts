@@ -14,7 +14,7 @@ export class EditPostComponent {
 	showResult: boolean = false;
 
 	constructor(
-		private auth: AuthService, 
+		private auth: AuthService,
 		private editPostService: EditPostService,
 		private route: ActivatedRoute,
 		public post: Post,
@@ -25,18 +25,18 @@ export class EditPostComponent {
 		let id = this.route.snapshot.paramMap.get('id');
 		this.route.snapshot.paramMap.get('id')
 		if (id != null && id != '0')
-			this.getUserByID(id);
+			this.getPostByID(id);
 		else{
 			this.post = new Post();
 			this.showResult = true;
 		}
-			
+
 
 
 		console.log(id);
 	}
 
-	getUserByID(id: string) {
+	getPostByID(id: string) {
 		this.editPostService.getPostByID(id).then(res => {
 
 			this.post.ID = res.id;
