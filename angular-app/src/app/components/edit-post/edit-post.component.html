@@ -1,4 +1,4 @@
-<h1>My Profile</h1>
+<h1>Create Post</h1>
 <div *ngIf="showResult">
     
                         
@@ -17,5 +17,6 @@
          
         </div>
         <button class="btn btn-lg btn-warning" (click)="save(post)">Save</button>
+        <button *ngIf="post.ID != undefined" class="btn btn-lg btn-danger" (click)="onDeleteClick(post)">Delete</button>
       
   </div>

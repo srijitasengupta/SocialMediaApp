@@ -82,9 +82,13 @@ export class AuthService {
         })
     }
 
-    async uploadImage(file: any, userId: any): Promise<string> {
+    async uploadImage(file: any, userId: any, fileName: any = null): Promise<string> {
         const storage = getStorage();
-        const storageRef = ref(storage, 'images/' + userId + '.jpg');
+        let storageRef :any;
+        if(userId == undefined)
+        storageRef = ref(storage, 'images/' + fileName);
+        else
+        storageRef = ref(storage, 'images/' + userId + '.jpg');
 
         const uploadTask = uploadBytesResumable(storageRef, file);
 

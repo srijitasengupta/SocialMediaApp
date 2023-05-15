@@ -40,9 +40,10 @@ export class EditPostComponent {
 		this.editPostService.getPostByID(id).then(res => {
 
 			this.post.ID = res.id;
-			console.log(res.data());
+			console.log(res);
 			this.post.Data = res.data();
 			this.post = this.post.Data;
+			this.post.ID = res.id;
 			this.showResult = true;
 		}, err => {
 			alert("Error occured!!");
@@ -58,7 +59,13 @@ export class EditPostComponent {
 
 	async upload(event: any) {
 		let path = event.target.files[0];
-		this.post.PhotoUrl = await this.auth.uploadImage(path, this.post.ID)
-		console.log(typeof this.post.PhotoUrl)
+		this.post.PhotoUrl = await this.auth.uploadImage(path, this.post.ID, path.name)
+		console.log(this.post.PhotoUrl)
 	}
+
+	onDeleteClick(post: Post) {
+		this.editPostService.deletePost(post);
+		this.router.navigate(['/my-feed']);
+	}
+
 }
