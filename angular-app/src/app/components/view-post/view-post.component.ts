@@ -43,7 +43,7 @@ export class ViewPostComponent {
     this.viewPostService.getUserByID(id).then(res => {
       this.user.id = res.id;
       this.user.Data = res.data();
-      console.log(this.user.Data.PhotoUrl);
+      console.log(this.user.Data.photoUrl);
     }, err => {
       alert("Error occured!!");
     });

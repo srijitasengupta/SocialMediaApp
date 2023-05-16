@@ -10,6 +10,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 export class RegisterComponent {
   email : string = '';
   password : string = '';
+  confirmPassword : string = '';
   name: string = '';
   dob: any ;
   path : any;
@@ -28,6 +29,11 @@ export class RegisterComponent {
 
     if(this.password == '') {
       alert('Please enter password');
+      return;
+    }
+
+    if(this.password != this.confirmPassword) {
+      alert('Please enter same Password');
       return;
     }
 

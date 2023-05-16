@@ -19,6 +19,10 @@ import { Post } from './model/post.model';
 import { Comment } from './model/comment.model';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { ViewPostComponent } from './components/view-post/view-post.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageModule } from 'primeng/message';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +41,10 @@ import { ViewPostComponent } from './components/view-post/view-post.component';
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
     DialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FileUploadModule,
+    HttpClientModule,
+    MessageModule
   ],
   providers: [
     User,

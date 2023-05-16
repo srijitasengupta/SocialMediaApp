@@ -1,46 +1,61 @@
-<div class="container-fluid">
-  <div class="row mt-5">
-      <div class="col"></div>
-      <div class="col-4">
-          <div class="card shadow">
-              <div class="card-body">
-                  <form>
-                      <div class="mb-3">
-                          <h4 class="text-dark text-muted">Register</h4>
-                      </div>
-                      <div class="mb-3">
-                        <label for="Name" class="form-label">Name</label>
-                        <input type="name" class="form-control" name="name" [(ngModel)]="name">
-                      </div>
-                      <div class="mb-3">
-                        <label for="Date Of Birth" class="form-label">Date Of Birth</label>
-                        <input type="date" class="form-control" name="dob" [(ngModel)]="dob">
-                      </div>
-                      <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" [(ngModel)]="email">
-                      </div>
-                      <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" [(ngModel)]="password">
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <label for="Image">Uplad Image</label>
-                          <input type="file" (change)="upload($event)" accept="*.png.jpg" id="">
-                        </div>
-                      </div>
-                      <br>
-                      <button type="button" class="btn btn-info" (click)="register()">Register</button>
-                      <div class="row">
-                          <div class="col-md-6">
-                              <a href="/login" style="text-decoration: none;">Have an account ? <span class="text-danger">Login</span></a>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
+<div class="row h-100" id="auth">
+  <div class="col-lg-5 col-12">
+    <div id="auth-left">
+      <div class="auth-logo">
+        <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"></a>
       </div>
-      <div class="col"></div>
+      <h1 class="auth-title">Sign Up</h1>
+      <p class="auth-subtitle mb-5">Input your data to register to our website.</p>
+
+      <form>
+        <div class="form-group position-relative has-icon-left mb-4">
+          <input type="text" class="form-control form-control-xl" name="name" [(ngModel)]="name" placeholder="Name">
+          <div class="form-control-icon">
+            <i class="bi bi-person"></i>
+          </div>
+        </div>
+        <div class="form-group position-relative has-icon-left mb-4">
+          <input type="date" class="form-control form-control-xl" name="dob" [(ngModel)]="dob" placeholder="Date of Birth">
+          <div class="form-control-icon">
+            <i class="bi bi-person"></i>
+          </div>
+        </div>
+        <div class="form-group position-relative has-icon-left mb-4">
+          <input type="text" class="form-control form-control-xl" name="email" [(ngModel)]="email" placeholder="Email">
+          <div class="form-control-icon">
+            <i class="bi bi-envelope"></i>
+          </div>
+          <small *ngIf="!email" id="username-help" class="p-error">Email is not available.</small>
+        </div>
+        <div class="form-group position-relative has-icon-left mb-4">
+          <input type="password" class="form-control form-control-xl" name="password" [(ngModel)]="password"
+            placeholder="Password">
+          <div class="form-control-icon">
+            <i class="bi bi-shield-lock"></i>
+          </div>
+          <small *ngIf="!password" id="username-help" class="p-error">Password is not available.</small>
+        </div>
+        <div class="form-group position-relative has-icon-left mb-4">
+          <input type="password" class="form-control form-control-xl" name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="Confirm Password">
+          <div class="form-control-icon">
+            <i class="bi bi-shield-lock"></i>
+          </div>
+        </div>
+        <div class="form-group position-relative has-icon-left mb-4">
+          <label for="Image">Upload Image</label>
+          <input type="file" (change)="upload($event)" accept="*.png.jpg" id="">
+        </div>
+        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" (click)="register()">Sign Up</button>
+      </form>
+      <div class="text-center mt-5 text-lg fs-4">
+        <p class='text-gray-600'>Already have an account? <a href="/login" class="font-bold">Log
+            in</a>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7 d-none d-lg-block">
+    <div id="auth-right">
+
+    </div>
   </div>
 </div>

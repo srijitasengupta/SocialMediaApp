@@ -17,7 +17,7 @@ export class LoginComponent {
   }
 
   login() {
-
+    console.log(this.email,this.password)
     if(this.email == '') {
       alert('Please enter email');
       return;
@@ -29,7 +29,7 @@ export class LoginComponent {
     }
 
     this.auth.login(this.email,this.password);
-    
+
     this.email = '';
     this.password = '';
 
