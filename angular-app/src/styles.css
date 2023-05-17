@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.main-content{
+    position: absolute;
+    left: 235px;
+    top: 60px;
+}
+
+@media only screen and (max-width: 600px) {
+    .main-content{
+        position: relative;
+        left: 0;
+    }
+}

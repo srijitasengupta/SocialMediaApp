@@ -22,6 +22,7 @@ import { ViewPostComponent } from './components/view-post/view-post.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageModule } from 'primeng/message';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MessageModule } from 'primeng/message';
     EditProfileComponent,
     UserDetailComponent,
     EditPostComponent,
-    ViewPostComponent
+    ViewPostComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

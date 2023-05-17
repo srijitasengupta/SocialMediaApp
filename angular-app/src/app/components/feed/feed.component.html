@@ -1,4 +1,6 @@
-<h1>My Feed</h1>
+<app-navbar></app-navbar>
+<div class="main-content">
+    <h1>My Feed</h1>
 <button class="btn btn-success" (click)="onCLickCreatePost()">Create Post</button>
 <div class="container">
     <ng-container *ngFor="let post of postsList;">
@@ -10,3 +12,5 @@
     </ng-container>
 
 </div>
+</div>
+
