@@ -8,6 +8,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { ViewPostComponent } from './components/view-post/view-post.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'edit-post/:id',component: EditPostComponent},
   {path: 'view-post/:id',component: ViewPostComponent},
   {path: 'navbar',component: NavbarComponent},
+  {path: 'error-page',component: ErrorPageComponent},
 
 ];
 

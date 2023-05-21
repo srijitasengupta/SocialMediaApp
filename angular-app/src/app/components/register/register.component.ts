@@ -42,6 +42,9 @@ export class RegisterComponent {
     this.showLoader = true;
     this.email = '';
     this.password = '';
+    this.confirmPassword = '';
+    this.name = '';
+    this.dob = '';
 
   }
 

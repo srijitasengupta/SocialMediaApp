@@ -11,10 +11,10 @@ import { User } from '../../model/user.model';
 })
 export class EditProfileComponent {
 
-  showResult : boolean =false;
+  showLoader : boolean =false;
 
   constructor(
-    private auth: AuthService, 
+    private auth: AuthService,
     private editProfileService:EditProfileService,
     private route: ActivatedRoute,
     public user: User
@@ -22,7 +22,7 @@ export class EditProfileComponent {
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
-    
+
     if(id!=null)
     this.getUserByID(id);
 
@@ -30,11 +30,12 @@ export class EditProfileComponent {
   }
 
   getUserByID(id: string){
+    this.showLoader = true;
     this.editProfileService.getUserByID(id).then(res => {
 
       this.user.id = res.id;
       this.user.Data = res.data();
-      this.showResult = true;
+      this.showLoader = false;
     }, err => {
       alert("Error occured!!");
     });
@@ -44,7 +45,7 @@ export class EditProfileComponent {
     this.editProfileService.saveUser(user);
     this.editProfileService.getUserByID(user.id);
   }
-  
+
   async upload(event: any) {
     let path = event.target.files[0];
     this.user.Data.photoUrl = await this.auth.uploadImage(path, this.user.id)

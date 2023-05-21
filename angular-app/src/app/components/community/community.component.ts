@@ -26,7 +26,7 @@ export class CommunityComponent {
       this.usersList = res;
       this.showLoader = false;
     }, err => {
-      alert("Error occured!!");
+      this.router.navigate(['error-page']);
     });
   }
 
@@ -38,7 +38,7 @@ export class CommunityComponent {
         this.usersList = res;
         this.showLoader = false;
       }, err => {
-        alert("error occured")
+        this.router.navigate(['error-page']);
       })
     }
     else {
@@ -46,7 +46,7 @@ export class CommunityComponent {
         this.usersList = res;
         this.showLoader = false;
       }, err => {
-        alert("error occured")
+        this.router.navigate(['error-page']);
       })
     }
 
@@ -58,7 +58,7 @@ export class CommunityComponent {
       this.usersList = res;
       this.showLoader = false;
     }, err => {
-      alert("error occured")
+      this.router.navigate(['error-page']);
     })
   }
 

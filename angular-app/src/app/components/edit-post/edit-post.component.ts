@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class EditPostComponent {
 
-	showResult: boolean = false;
+	showLoader: boolean = false;
 
 	constructor(
 		private auth: AuthService,
@@ -28,7 +28,6 @@ export class EditPostComponent {
 			this.getPostByID(id);
 		else{
 			this.post = new Post();
-			this.showResult = true;
 		}
 
 
@@ -37,6 +36,7 @@ export class EditPostComponent {
 	}
 
 	getPostByID(id: string) {
+		this.showLoader = true;
 		this.editPostService.getPostByID(id).then(res => {
 
 			this.post.ID = res.id;
@@ -44,9 +44,9 @@ export class EditPostComponent {
 			this.post.Data = res.data();
 			this.post = this.post.Data;
 			this.post.ID = res.id;
-			this.showResult = true;
+			this.showLoader = false;
 		}, err => {
-			alert("Error occured!!");
+			this.router.navigate(['error-page']);
 		});
 	}
 

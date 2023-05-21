@@ -83,6 +83,7 @@
   cursor: pointer;
 }
 
+/* For progress spinner */
 .parent-container {
   position: relative;
 }

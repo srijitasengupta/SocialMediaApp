@@ -13,8 +13,9 @@ export class EditProfileService {
 
     app = initializeApp(environment.firebase);
     db = getFirestore(this.app);
+    showLoader = false;
     collectionRef: CollectionReference<DocumentData> = collection(this.db, "users");
-        
+
     //users : User[] = [];
     constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
@@ -22,19 +23,21 @@ export class EditProfileService {
         const docRef = doc(this.collectionRef, id);
         const docSnap = await getDoc(docRef);
         return docSnap;
-        
+
     }
 
     async saveUser(user :any){
+      this.showLoader = true;
         try{
             const docRef = doc(this.collectionRef, user.id);
             await setDoc(docRef, user.Data);
+            this.showLoader = false;
             alert("Changes saved");
         }
         catch(err){
             alert(err);
         }
-        
+
     }
-    
+
 }

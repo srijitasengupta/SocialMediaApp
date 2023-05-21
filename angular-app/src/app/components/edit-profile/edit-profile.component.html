@@ -1,7 +1,10 @@
 <app-navbar></app-navbar>
-<div class="main-content">
-	<h1>My Profile</h1>
-	<div *ngIf="showResult">
+<div class="parent-container">
+  <div class="loader-container d-flex justify-content-center align-items-center" *ngIf="showLoader">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <div class="main-content">
+	  <h1>My Profile</h1>
 
 
 		<img height="50" width="50" [src]="user.Data?.photoUrl" alt="User Image">

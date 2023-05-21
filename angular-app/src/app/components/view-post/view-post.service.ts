@@ -51,7 +51,7 @@ export class ViewPostService {
     }
   }
 
-  async updatePost(postId: any,post: any) {
+  async updatePost(postId: any,post: any) : Promise<string>{
     post.Data ={
       ObjectCreatedDate: post.ObjectCreatedDate,
       ObjectLastModifiedDate: post.ObjectLastModifiedDate,
@@ -65,8 +65,10 @@ export class ViewPostService {
       const docRef = doc(this.collectionRef, postId);
       await setDoc(docRef, post.Data);
       alert("Changes saved");
+      return docRef.id;
     } catch (err) {
       alert(err);
+      throw err;
     }
   }
 

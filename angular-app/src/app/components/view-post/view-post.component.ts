@@ -16,6 +16,7 @@ export class ViewPostComponent {
   postId: string = '';
   commentId: string = '';
   comments: Comment[] = [];
+  showLoader: boolean = false;
 
   constructor(
 		private auth: AuthService,
@@ -29,6 +30,7 @@ export class ViewPostComponent {
 
 	ngOnInit(): void {
     let id  = localStorage.getItem("activeUser") as string;
+    this.showLoader = true;
     this.getCurrentUserByID(id);
 
     this.postId = this.route.snapshot.paramMap.get('id') as string;
@@ -41,9 +43,10 @@ export class ViewPostComponent {
 
   getCurrentUserByID(id: string){
     this.viewPostService.getUserByID(id).then(res => {
+      console.log("xcfvgbhn",res.data());
       this.user.id = res.id;
       this.user.Data = res.data();
-      console.log(this.user.Data.photoUrl);
+      this.showLoader = false;
     }, err => {
       alert("Error occured!!");
     });
@@ -54,9 +57,11 @@ export class ViewPostComponent {
       this.post.ID = res.id;
 			this.post.Data = res.data();
 			this.post = this.post.Data;
+      this.showLoader = false;
 
       if(this.post.Comments.length > 0){
         for(let comment of this.post.Comments || []) {
+          this.showLoader = true;
           this.getCommentByID(comment);
         }
       }
@@ -75,6 +80,7 @@ export class ViewPostComponent {
         let user = new User();
         user.Data = res.data()
         comment.UserName = user.Data?.Name;
+        this.showLoader = false;
       })
       this.comments.push(comment);
 		}, err => {
@@ -85,9 +91,10 @@ export class ViewPostComponent {
   onClickAddComment() {
     this.comment.User = localStorage.getItem('activeUser');
     this.comment.Post = this.postId;
-
+    this.showLoader = true;
     this.viewPostService.saveComment(this.comment).then(res => {
       this.commentId = res;
+      this.comment.CommentStr = '';
       this.savePost(this.post);
     }, err => {
       alert("Error occured!!");
@@ -96,7 +103,13 @@ export class ViewPostComponent {
 
 	savePost(post: Post) {
 		this.post?.Comments.push(this.commentId);
-    this.viewPostService.updatePost(this.postId,this.post);
+    this.viewPostService.updatePost(this.postId,this.post).then(res => {
+      this.showLoader = false;
+      this.comments = [];
+      this.getPostByID(this.postId);
+    },err => {
+      alert("Errort occured!!!");
+    });
 	}
 }
 

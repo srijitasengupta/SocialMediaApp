@@ -16,12 +16,14 @@ export class AuthService {
 
     app = initializeApp(environment.firebase);
     db = getFirestore(this.app);
+    showLoader = false;
 
     constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
     // login method
     async login(email: string, password: string) {
         try {
+           this.showLoader = true;
             const res = await this.fireauth.signInWithEmailAndPassword(email, password);
 
             let userid = res.user?.uid.toString();
@@ -35,6 +37,7 @@ export class AuthService {
                 let user = new User();
                 user.Data =docSnap.data();
             }
+            this.showLoader = false;
             alert('Login Successful!');
             this.router.navigate(['/community']);
         } catch (err) {
@@ -46,6 +49,7 @@ export class AuthService {
     // register method
     async register(email: string, password: string, file: any, dob: any, name: string) {
         try {
+            this.showLoader = true;
             const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
 
             const userid = res.user?.uid.toString();
@@ -65,6 +69,7 @@ export class AuthService {
             await setDoc(docRef, data);
 
             alert('Registration Successful');
+            this.showLoader = false;
             this.router.navigate(['/community']);
         } catch (err) {
             alert(err);
@@ -83,6 +88,7 @@ export class AuthService {
     }
 
     async uploadImage(file: any, userId: any, fileName: any = null): Promise<string> {
+        this.showLoader = true;
         const storage = getStorage();
         let storageRef :any;
         if(userId == undefined)
@@ -114,6 +120,7 @@ export class AuthService {
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                         console.log('File available at', downloadURL);
+                        this.showLoader = false;
                         resolve(downloadURL);
                     });
                 }

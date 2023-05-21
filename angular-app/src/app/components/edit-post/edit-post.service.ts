@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class EditPostService {
 	app = initializeApp(environment.firebase);
 	db = getFirestore(this.app);
+  showLoader = false;
 	collectionRef: CollectionReference<DocumentData> = collection(this.db, "posts");
 
 	//users : User[] = [];
@@ -24,6 +25,7 @@ export class EditPostService {
 	}
 
 	async savePost(post: any) {
+    this.showLoader = true;
 		post.Data = {
 			ObjectCreatedDate: post.ObjectCreatedDate,
 			ObjectLastModifiedDate: post.ObjectLastModifiedDate,
@@ -42,6 +44,7 @@ export class EditPostService {
 				docRef = doc(this.collectionRef);
 
 			await setDoc(docRef, post.Data);
+      this.showLoader = false;
 			alert("Changes saved");
 
 		}
@@ -52,11 +55,13 @@ export class EditPostService {
 	}
 
 	async deletePost(post: any){
+    this.showLoader = true;
 		console.log(post)
 		try {
 
 			let docRef = doc(this.collectionRef, post.ID);
 			await deleteDoc(docRef);
+      this.showLoader = false;
 			alert("Post deleted");
 
 		}

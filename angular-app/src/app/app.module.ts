@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MessageModule } from 'primeng/message';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     UserDetailComponent,
     EditPostComponent,
     ViewPostComponent,
-    NavbarComponent
+    NavbarComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
