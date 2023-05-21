@@ -48,7 +48,7 @@ export class FeedComponent {
 
 
 		}, err => {
-		  alert("Error occured!!");
+		  this.router.navigate(['error-page'])
 		});
 	  }
 
@@ -60,7 +60,7 @@ export class FeedComponent {
 			this.postsList = res;
 			console.log(this.postsList)
 		},err => {
-			alert("error occured")
+      this.router.navigate(['error-page'])
 		})
 
 	}

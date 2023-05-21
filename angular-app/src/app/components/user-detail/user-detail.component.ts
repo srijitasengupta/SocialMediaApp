@@ -17,7 +17,8 @@ export class UserDetailComponent {
     private auth: AuthService,
     private userDetailService: UserDetailService,
     private route: ActivatedRoute,
-    public curentUser: User
+    public curentUser: User,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class UserDetailComponent {
       this.curentUser.id = res.id;
       this.curentUser.Data = res.data();
     }, err => {
-      alert("Error occured!!");
+      this.router.navigate(['error-page'])
     });
   }
 

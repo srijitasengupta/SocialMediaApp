@@ -47,6 +47,7 @@ export class ViewPostService {
       return docRef.id;
     } catch (error) {
       console.error("Error saving object:", error);
+      this.router.navigate(['error-page'])
       throw error;
     }
   }
@@ -67,7 +68,7 @@ export class ViewPostService {
       alert("Changes saved");
       return docRef.id;
     } catch (err) {
-      alert(err);
+      this.router.navigate(['error-page'])
       throw err;
     }
   }

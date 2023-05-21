@@ -23,7 +23,7 @@ export class UserDetailService {
       await setDoc(docRef, user.Data);
       alert("Changes saved");
     } catch (err) {
-      alert(err);
+      this.router.navigate(['error-page'])
     }
   }
 

@@ -17,7 +17,8 @@ export class EditProfileComponent {
     private auth: AuthService,
     private editProfileService:EditProfileService,
     private route: ActivatedRoute,
-    public user: User
+    public user: User,
+    private router: Router
     ) { };
 
   ngOnInit(): void {
@@ -37,7 +38,7 @@ export class EditProfileComponent {
       this.user.Data = res.data();
       this.showLoader = false;
     }, err => {
-      alert("Error occured!!");
+      this.router.navigate(['error-page']);
     });
   }
 

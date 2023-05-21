@@ -12,15 +12,16 @@ import { EditProfileService } from '../edit-profile/edit-profile.service';
 export class NavbarComponent {
 
   constructor(
-    private auth: AuthService, 
+    private auth: AuthService,
     private editProfileService: EditProfileService,
     private route: ActivatedRoute,
-    public user: User
+    public user: User,
+    private router: Router
     ) { };
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
-    
+
     if(id!=null)
     this.getUserByID(id);
 
@@ -33,7 +34,7 @@ export class NavbarComponent {
       this.user.id = res.id;
       this.user.Data = res.data();
     }, err => {
-      alert("Error occured!!");
+      this.router.navigate(['error-page'])
     });
   }
 

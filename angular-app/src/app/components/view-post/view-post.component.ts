@@ -48,7 +48,7 @@ export class ViewPostComponent {
       this.user.Data = res.data();
       this.showLoader = false;
     }, err => {
-      alert("Error occured!!");
+      this.router.navigate(['error-page'])
     });
   }
 
@@ -66,7 +66,7 @@ export class ViewPostComponent {
         }
       }
 		}, err => {
-			alert("Error occured!!");
+			this.router.navigate(['error-page'])
 		});
 	}
 
@@ -84,7 +84,7 @@ export class ViewPostComponent {
       })
       this.comments.push(comment);
 		}, err => {
-			alert("Error occured!!");
+			this.router.navigate(['error-page'])
 		});
 	}
 
@@ -97,7 +97,7 @@ export class ViewPostComponent {
       this.comment.CommentStr = '';
       this.savePost(this.post);
     }, err => {
-      alert("Error occured!!");
+      this.router.navigate(['error-page'])
     });
   }
 
@@ -108,7 +108,7 @@ export class ViewPostComponent {
       this.comments = [];
       this.getPostByID(this.postId);
     },err => {
-      alert("Errort occured!!!");
+      this.router.navigate(['error-page'])
     });
 	}
 }
