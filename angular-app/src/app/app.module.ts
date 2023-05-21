@@ -23,6 +23,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageModule } from 'primeng/message';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     BrowserAnimationsModule,
     FileUploadModule,
     HttpClientModule,
-    MessageModule
+    MessageModule,
+    ProgressSpinnerModule
   ],
   providers: [
     User,

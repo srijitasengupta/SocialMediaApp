@@ -1,27 +1,35 @@
 <app-navbar></app-navbar>
-<div class="main-content">
-	<h1>Explore your Community</h1>
-	<a href="javascript: void(0)" (click)="onClickMyProfile($event)">My Profile</a>
-	<div class="user-list">
-		<div class="search-container">
-			<input type="text" [(ngModel)]="searchTerm" placeholder="Search by name">
-			<button (click)="search()">Search</button>
-		</div>
-		<br>
-		<ul>
-			<li *ngFor="let user of usersList">
-				<img [src]="user.Data.photoUrl" alt="User Image">
-				<div class="user-info">
-					<div class="user-name">{{ user.Data.Name }}</div>
-					<div class="user-bio">{{ user.Data.Bio }}</div>
-					<button (click)="showDialog(user)" label="Show">See User</button>
-				</div>
-			</li>
-		</ul>
-	</div>
+<div class="parent-container">
+  <div class="loader-container d-flex justify-content-center align-items-center" *ngIf="showLoader">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <div class="main-content">
+    <div [ngClass]="{'header-empty': usersList.length === 0}" class="header">
+      <img src="https://images.pexels.com/photos/2356071/pexels-photo-2356071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Header Image">
+      <div class="search-container">
+        <input type="text" [(ngModel)]="searchTerm" (keyup)="onKeyUp($event)" placeholder="Search by name">
+        <button (click)="search()">Search</button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div *ngIf="usersList.length == 0">No data found!!</div>
+      <div class="col-md-4" *ngFor="let user of usersList">
+        <div class="card">
+          <img [src]="user.Data.photoUrl" alt="User Image">
+          <div class="user-info">
+            <div class="user-name">{{ user.Data.Name }}</div>
+            <div class="user-email">{{ user.Data.Email }}</div>
+            <div class="user-bio">{{ user.Data.Bio }}</div>
+            <br>
+            <app-user-detail [user]="user"></app-user-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<p-dialog header="Header" [(visible)]="visible" [style]="{width: '50vw','background-color': '#a19787'}"
-	[styleClass]="'custom-dialog'">
-	<app-user-detail [user]="user"></app-user-detail>
-</p-dialog>
+
+
+

@@ -14,6 +14,7 @@ export class RegisterComponent {
   name: string = '';
   dob: any ;
   path : any;
+  showLoader: boolean = false;
 
   constructor(private auth : AuthService) { }
 
@@ -38,7 +39,7 @@ export class RegisterComponent {
     }
 
     this.auth.register(this.email,this.password, this.path, this.dob,this.name);
-
+    this.showLoader = true;
     this.email = '';
     this.password = '';
 

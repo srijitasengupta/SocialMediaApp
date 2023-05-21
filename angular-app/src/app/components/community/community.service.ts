@@ -33,8 +33,11 @@ export class CommunityService {
   async getUserByName(searchTerm: string): Promise<User[]> {
     this.users =[];
     const usersRef = collection(this.db, "users");
-    const q = query(usersRef, where("Name", "==", searchTerm));
-    const querySnapshot = await getDocs(q);
+    //const q = query(usersRef, where("Name", "==", searchTerm));
+    //const querySnapshot = await getDocs(query(usersRef, where("Name", ">=", searchTerm), where("Name", "<", searchTerm + "~")));
+   // const querySnapshot = await getDocs(query(usersRef, where("Name", "array-contains", searchTerm)));
+   const querySnapshot = await getDocs(query(usersRef, where("Name", ">=", searchTerm), where("Name", "<=", searchTerm + "\uf8ff")));
+    //const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
         let user = new User();
@@ -42,7 +45,8 @@ export class CommunityService {
         user.Data = doc.data();
         this.users.push(user);
     });
-    return this.users;
+    const filteredUsers = this.users.filter((user) => user.Data.Name.includes(searchTerm));
+    return filteredUsers;
   }
 
 }

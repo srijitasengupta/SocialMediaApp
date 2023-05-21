@@ -25,7 +25,7 @@ export class UserDetailComponent {
       console.log("ssssssss", this.user?.Data);
     }
     this.userId = localStorage.getItem('activeUser') as string;
-    if(this.userId){
+    if (this.userId) {
       this.getCurrentUserByID(this.userId);
     }
 
@@ -40,19 +40,30 @@ export class UserDetailComponent {
     });
   }
 
-  clickFollow() {
-    this.curentUser?.Data?.Following.push(this.user.id);
+  getIsFollowing() {
+    for (let id of this.curentUser?.Data?.Following || []) {
+      if (id == this.user?.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  toggleFollow() {
+    if (this.getIsFollowing()) {
+      const index = this.curentUser?.Data?.Following.indexOf(this.user.id);
+
+      if (index !== -1) {
+        this.curentUser?.Data?.Following.splice(index, 1);
+        this.user.Data.Followers -= 1;
+      }
+    }
+    else {
+      this.curentUser?.Data?.Following.push(this.user.id);
+      this.user.Data.Followers += 1;
+    }
     this.userDetailService.saveUser(this.curentUser);
-    this.user.Data.Followers += 1;
     this.userDetailService.saveUser(this.user);
   }
 
-  getIsFollowing() {
-    for(let id of this.curentUser?.Data?.Following || []){
-      if(id == this.user?.id){
-        return false;
-      }
-    }
-    return true;
-  }
 }

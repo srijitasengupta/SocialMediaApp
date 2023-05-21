@@ -16,12 +16,15 @@ export class CommunityComponent {
   searchTerm: string = '';
   visible: boolean = false;
   user: any;
-  constructor(private auth: AuthService, private communityService: CommunityService,private router: Router) { };
+  showLoader: boolean = false;
+  constructor(private auth: AuthService, private communityService: CommunityService, private router: Router) { };
 
   ngOnInit(): void {
     this.usersList = [];
+    this.showLoader = true;
     this.communityService.getAllUsers().then(res => {
       this.usersList = res;
+      this.showLoader = false;
     }, err => {
       alert("Error occured!!");
     });
@@ -29,23 +32,41 @@ export class CommunityComponent {
 
   search() {
     this.usersList = [];
+    this.showLoader = true;
+    if (this.searchTerm == '') {
+      this.communityService.getAllUsers().then(res => {
+        this.usersList = res;
+        this.showLoader = false;
+      }, err => {
+        alert("error occured")
+      })
+    }
+    else {
+      this.communityService.getUserByName(this.searchTerm).then(res => {
+        this.usersList = res;
+        this.showLoader = false;
+      }, err => {
+        alert("error occured")
+      })
+    }
+
+  }
+
+  onKeyUp(event: any) {
+    this.showLoader = true;
     this.communityService.getUserByName(this.searchTerm).then(res => {
       this.usersList = res;
-    },err => {
+      this.showLoader = false;
+    }, err => {
       alert("error occured")
     })
   }
 
-  onClickMyProfile($event: any){
-    this.router.navigate(['/edit-profile',localStorage.getItem('activeUser')]);
-  }
-
-  showDialog(user: any){
-    this.visible=true;
-    this.user = user;
+  onClickMyProfile($event: any) {
+    this.router.navigate(['/edit-profile', localStorage.getItem('activeUser')]);
   }
 
   updateCuurentUser() {
-    console.log("sssss",this.user);
+    console.log("sssss", this.user);
   }
 }
