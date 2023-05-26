@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, setDoc, CollectionReference, query, where, getDocs, getDoc, DocumentData } from "firebase/firestore";
+import { Post } from 'src/app/model/post.model';
 import { User } from 'src/app/model/user.model';
 import { environment } from 'src/environments/environment';
 
@@ -39,5 +40,20 @@ export class EditProfileService {
         }
 
     }
+
+    async getPosts(queryParams: any[]): Promise<Post[]> {
+		let posts: Post[] = [];
+		const usersRef = collection(this.db, "posts");
+		const q = query(usersRef, where("User", "in",queryParams));
+		const querySnapshot = await getDocs(q);
+
+		querySnapshot.forEach((doc) => {
+			let post = new Post();
+			post.ID = doc.id;
+			post.Data = doc.data();
+			posts.push(post);
+		});
+		return posts;
+	}
 
 }
