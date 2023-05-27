@@ -7,7 +7,8 @@ export class Post {
     PhotoUrl: string ="";
     User : any;
     Likes : number = 0;
+    isLiked: boolean = false;
     Comments: any[] =[];
     Location : any;
-    
+
 }

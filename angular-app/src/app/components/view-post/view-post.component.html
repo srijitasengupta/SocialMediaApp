@@ -58,7 +58,17 @@
                 <h4 class="username">{{ user.Data?.Name }}</h4>
               </div>
               <div class="post-description">
-                <p class="description">{{ post.Caption }}</p>
+                <div class="d-flex align-items-center">
+                  <div class="caption-wrapper">
+                    <p class="description">{{ post.Caption }}</p>
+                  </div>
+                  <div class="like-wrapper">
+                    <button class="like-button" (click)="toggleLike()">
+                      <i class="pi" [ngClass]="isLiked ? 'pi-heart' : 'pi-heart-fill'"></i>
+                      <span class="likes-count">{{ likesCount }}</span>
+                    </button>
+                  </div>
+                </div>
               </div>
               <hr>
               <div class="comments">
@@ -82,3 +92,4 @@
     </div>
   </div>
 </div>
+

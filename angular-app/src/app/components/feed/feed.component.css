@@ -1,0 +1,66 @@
+.main-content {
+  padding: 30px;
+  padding-left: 55px;
+  border: 1px solid #ccc;
+}
+
+.post {
+  background-color: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.user-photo {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.username {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.user-photo-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.photo {
+  text-align: center;
+}
+
+.caption {
+  padding: 10px 0;
+}
+
+.actions {
+  display: flex;
+  padding: 10px 0;
+}
+
+.like-button,
+.comment-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.pi-heart,
+.pi-heart-fill {
+  color: red;
+}
+
+.like-button i,
+.comment-button i {
+  font-size: 20px;
+}
+
+.likes-count {
+  margin-left: 5px;
+  font-weight: bold;
+}

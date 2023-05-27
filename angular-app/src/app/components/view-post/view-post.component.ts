@@ -17,6 +17,8 @@ export class ViewPostComponent {
   commentId: string = '';
   comments: Comment[] = [];
   showLoader: boolean = false;
+  isLiked: boolean = false;
+  likesCount: any = 0;
 
   constructor(
 		private auth: AuthService,
@@ -57,6 +59,7 @@ export class ViewPostComponent {
       this.post.ID = res.id;
 			this.post.Data = res.data();
 			this.post = this.post.Data;
+      this.likesCount = this.post.Likes;
       this.showLoader = false;
 
       if(this.post.Comments.length > 0){
@@ -111,5 +114,18 @@ export class ViewPostComponent {
       this.router.navigate(['error-page'])
     });
 	}
+
+  toggleLike() {
+    this.isLiked = !this.isLiked;
+    this.post.Likes = this.isLiked ? this.post.Likes - 1: this.post.Likes + 1;
+
+    this.viewPostService.updatePost(this.postId,this.post).then(res => {
+      this.showLoader = false;
+      this.comments = [];
+      this.getPostByID(this.postId);
+    },err => {
+      this.router.navigate(['error-page'])
+    });
+  }
 }
 

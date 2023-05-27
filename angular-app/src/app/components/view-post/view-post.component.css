@@ -3,6 +3,8 @@
   padding: 20px;
   margin-bottom: 20px;
   margin-top: 100px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .post-image {
@@ -10,6 +12,28 @@
   max-height: 400px;
   object-fit: cover;
 }
+
+.like-button {
+  border: none;
+  cursor: pointer;
+}
+
+.pi {
+  color: red;
+}
+
+.likes-count {
+  margin-left: 0.5em;
+}
+
+.caption-wrapper {
+  flex-grow: 1;
+}
+
+.like-wrapper {
+  margin-left: 1em;
+}
+
 
 .profile-picture {
   width: 50px;
