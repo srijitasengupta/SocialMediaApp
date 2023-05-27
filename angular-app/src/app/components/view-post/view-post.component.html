@@ -39,7 +39,7 @@
     </div>
   </div>
 </div> -->
-<app-navbar></app-navbar>
+<app-navbar [currentUser]="user"></app-navbar>
 <div class="parent-container">
   <div class="loader-container d-flex justify-content-center align-items-center" *ngIf="showLoader">
     <p-progressSpinner></p-progressSpinner>
@@ -53,9 +53,9 @@
               <img [src]="post.PhotoUrl" alt="Post Image" class="img-fluid post-image">
             </div>
             <div class="col-md-6">
-              <div class="post-header">
+              <div class="post-header" *ngIf="user.Data != undefined">
                 <img [src]="user.Data?.photoUrl" alt="Profile Picture" class="profile-picture">
-                <h4 class="username">{{ user.Data?.Name }}</h4>
+                <h4 class="username">{{ user.Data.Name }}</h4>
               </div>
               <div class="post-description">
                 <div class="d-flex align-items-center">

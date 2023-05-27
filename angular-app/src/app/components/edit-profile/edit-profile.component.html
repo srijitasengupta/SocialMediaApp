@@ -3,21 +3,101 @@
   <div class="loader-container d-flex justify-content-center align-items-center" *ngIf="showLoader">
     <p-progressSpinner></p-progressSpinner>
   </div>
-  <div class="main-content">
-	  <h1>My Profile</h1>
+  <div class="main-content container m-5">
+	<div class=" profile-section">
+		
+		<div class="row">
+			
+			<div class="col-1 col-lg-1"></div>
+			<div class="col-3 col-lg-3">
+				<div class="profile-photo mt-3">
+					<label for="file-upload" class="image-label">
+					<img [src]="user.Data?.photoUrl" alt="Profile Photo">
+					<p *ngIf="!isReadonly" class="image-text"> 
+						<span class="material-icons-outlined">
+							photo_camera
+							</span>
+					</p>
+				  
+				</label>
+				  <input id="file-upload" type="file" (change)="upload($event)" accept="*.png.jpg" style="display: none;">
+				</div>
+			</div>
+			<div class="col-6 col-lg-6 profile-details mt-3">
+				
+				<ng-container *ngIf="user.Data!=undefined">
+					<div class="h3 pl-4">
+						<input [readonly]="isReadonly" type="text" name="name" id="name" [(ngModel)]="user.Data.Name">
+					</div>
+					<!-- <div>
+						<input [readonly]="isReadonly" type="text"name="bio" id="bio" width="200px" [(ngModel)]="user.Data.Bio">
+					</div> -->
+					<div class="pl-4">
+						<textarea [readonly]="isReadonly" name="bio" id="bio" cols="45" rows="2" [(ngModel)]="user.Data.Bio"></textarea>
+					</div>
+					<div class="stats row">
+						<ng-container *ngFor="let stat of stats | keyvalue;">
+							<div class="col-3 col-lg-3 text-center" >
+								<div class="number  strong">{{stat.value}}</div>
+								<span class="type">{{stat.key}}</span>
+							</div>
+						</ng-container>
+						
+					</div>
+					
+					</ng-container>
+					<div class="buttons pl-5 mt-4">
+						<button *ngIf="!isReadonly" class="btn btn-sm btn-primary" (click)="save(user)">Save</button>
+						<button *ngIf="!isReadonly" class="btn btn-sm btn-light mx-3" (click)="onCancelClick()">Cancel</button>
+					</div>
+			</div>
+			<div class="col-2 col-lg-2 mr-5 mt-3">
+				<span *ngIf="isReadonly" class="material-icons-outlined edit-icon" (click)="onEditClick($event)">
+					edit
+					</span>
+					
+			</div>
+			<!-- <div class="col-lg-4"></div> -->
+		</div>
+		
+	</div>
+	<div class="post-section">
+		<div class="text-center mt-3">
+			<h4>
+				<span class="material-icons-outlined">
+					grid_on
+					</span>
+					Posts
+			</h4>
+		</div>
+		<div class="row my-4 mx-1">
+			<ng-container *ngFor="let post of posts;">
+				<div class="col-4 col-lg-4" (click)="onPostClick($event,post)">
+					<img [src]="post.Data?.PhotoUrl">
+					<p class="image-text">
+						<span class="material-icons-outlined">
+							favorite
+							</span> {{post.Data.Likes}}
+							<br>
+							<span class="material-icons-outlined">
+								chat_bubble
+								</span> {{post.Data.Comments.length}}
+					</p>
+				</div>
+			</ng-container>
+		</div>
+	</div>
 
 
-		<img height="50" width="50" [src]="user.Data?.photoUrl" alt="User Image">
+
+		<!-- <img height="50" width="50" [src]="user.Data?.photoUrl" alt="User Image">
 		<input type="file" (change)="upload($event)" accept="*.png.jpg" id="">
 		<div>
 			<div class="mb-3">
 				<label for="name" class="form-label">Name</label>
 				<input type="text" class="form-control" name="name" [(ngModel)]="user.Data.Name">
 			</div>
-			<!-- <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" [(ngModel)]="user.Data.Email">
-              </div> -->
+			
 			<div class="mb-3">
 				<label for="dob" class="form-label">DOB</label>
 				<input readonly="true" type="date" class="form-control" name="dob" [(ngModel)]="user.Data.Dob">
@@ -27,8 +107,8 @@
 				<input type="text" class="form-control" name="bio" [(ngModel)]="user.Data.Bio">
 			</div>
 
-		</div>
-		<button class="btn btn-lg btn-warning" (click)="save(user)">Save</button>
+		</div> -->
+		
 
 	</div>
 </div>
