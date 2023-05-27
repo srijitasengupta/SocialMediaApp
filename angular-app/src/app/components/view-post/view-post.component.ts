@@ -44,8 +44,8 @@ export class ViewPostComponent {
 	}
 
   getCurrentUserByID(id: string){
+    this.user = new User();
     this.viewPostService.getUserByID(id).then(res => {
-      console.log("xcfvgbhn",res.data());
       this.user.id = res.id;
       this.user.Data = res.data();
       this.showLoader = false;
