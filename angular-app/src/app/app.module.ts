@@ -25,6 +25,8 @@ import { MessageModule } from 'primeng/message';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { Subject } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -50,12 +52,14 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
     FileUploadModule,
     HttpClientModule,
     MessageModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    NgxFileDropModule
   ],
   providers: [
     User,
     Post,
     Comment,
+    Subject
   ],
   bootstrap: [AppComponent]
 })

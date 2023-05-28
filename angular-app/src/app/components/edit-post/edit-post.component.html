@@ -1,24 +1,24 @@
-<h1>Create Post</h1>
-  <div class="parent-container">
+<div class="parent-container">
     <div class="loader-container d-flex justify-content-center align-items-center" *ngIf="showLoader">
-      <p-progressSpinner></p-progressSpinner>
+        <p-progressSpinner></p-progressSpinner>
     </div>
-
-
-        <div>
-            <div class="mb-3">
-                <textarea name="caption" id="caption" cols="30" rows="10" [(ngModel)]="post.Caption"></textarea>
+    <div class="row">
+        <div class="col-4 col-lg-4 image-section">
+            <div *ngIf="!post?.PhotoUrl" class="drop-area" (drop)="handleFileDrop($event)"
+                (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+                <p>or</p>
+                <input type="file" (change)="handleFileInput($event)" multiple>
             </div>
-            <div class="mb-3">
-                <img height="50" width="50" [src]="post.PhotoUrl" alt="User Image">
-                <input type="file" (change)="upload($event)" accept="*.png.jpg" id="">
-
-            </div>
-
-
-
+            <img *ngIf="post?.PhotoUrl" [src]="post.PhotoUrl" alt="User Image">
         </div>
-        <button class="btn btn-lg btn-warning" (click)="save(post)">Save</button>
-        <button *ngIf="post.ID != undefined" class="btn btn-lg btn-danger" (click)="onDeleteClick(post)">Delete</button>
+        <div *ngIf="post?.PhotoUrl" class="col-4 col-lg-4 details-section">
+            <div class="mb-3">
+                <textarea placeholder="Write something ...." name="caption" id="caption" class="custom-textarea" [(ngModel)]="post.Caption"></textarea>
+                <button class="btn btn-lg btn-warning" (click)="save(post)">Save</button>
+                <button *ngIf="post.ID != undefined" class="btn btn-lg btn-danger"
+                    (click)="onDeleteClick(post)">Delete</button>
 
-  </div>
+            </div>
+        </div>
+    </div>
+</div>

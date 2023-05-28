@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { CollectionReference, collection, doc, getDoc, getFirestore, setDoc, DocumentData, deleteDoc } from 'firebase/firestore';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,11 +12,15 @@ import { environment } from 'src/environments/environment';
 export class EditPostService {
 	app = initializeApp(environment.firebase);
 	db = getFirestore(this.app);
-  showLoader = false;
+  	showLoader = false;
 	collectionRef: CollectionReference<DocumentData> = collection(this.db, "posts");
 
 	//users : User[] = [];
-	constructor(private fireauth: AngularFireAuth, private router: Router) { }
+	constructor(
+		private fireauth: AngularFireAuth, 
+		private router: Router,
+		public postCreated: Subject<boolean> = new Subject<boolean>()
+		) { }
 
 	async getPostByID(id: string) {
 		const docRef = doc(this.collectionRef, id);
@@ -44,12 +49,14 @@ export class EditPostService {
 				docRef = doc(this.collectionRef);
 
 			await setDoc(docRef, post.Data);
-      this.showLoader = false;
+      		this.showLoader = false;
+			
 			alert("Changes saved");
-
+			this.postCreated.next(false);
 		}
 		catch (err) {
 			alert(err);
+			this.postCreated.next(true);
 		}
 
 	}

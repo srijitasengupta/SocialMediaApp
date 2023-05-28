@@ -15,3 +15,33 @@
   align-items: center;
   z-index: 9999;
 }
+.image-section{
+  height: 70vh;
+  width: 25vw;
+  object-fit: cover;
+}
+
+.image-section img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.drop-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  height: 100%;
+  width: 190%;
+}
+
+.drag-over {
+  background-color: #f7f7f7;
+}
+
+.custom-textarea{
+  resize: none;
+  border: none;
+  outline: none;
+  height: 50vh; /* Set the desired height to control the number of rows */
+  width: 300px;
+}

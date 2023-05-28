@@ -27,6 +27,7 @@ export class EditProfileComponent {
 	) { };
 
 	ngOnInit(): void {
+		this.showLoader = true;
 		let id = this.route.snapshot.paramMap.get('id');
 
 		if (id != null){
@@ -76,7 +77,7 @@ export class EditProfileComponent {
 		this.editProfileService.getPosts([this.user.id]).then(res => {
 			this.posts = res;
 			this.stats['Posts'] =this.posts.length;
-			
+			this.showLoader = false;
 			console.log(this.stats)
 			console.log(this.posts)
 		},err => {
