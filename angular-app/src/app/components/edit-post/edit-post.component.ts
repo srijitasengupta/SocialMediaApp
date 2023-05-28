@@ -3,7 +3,6 @@ import { EditPostService } from './edit-post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/model/post.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { HttpClient } from '@angular/common/http';
 @Component({
 	selector: 'app-edit-post',
 	templateUrl: './edit-post.component.html',
@@ -23,7 +22,7 @@ export class EditPostComponent {
 		private route: ActivatedRoute,
 		public post: Post,
 		private router: Router,
-		private http: HttpClient
+		
 	) { };
 
 	ngOnInit(): void {
