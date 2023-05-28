@@ -43,8 +43,6 @@ export class FeedService {
     const docRef = doc(collection(this.db, "users"), id);
     const docSnap = await getDoc(docRef);
     return docSnap;
-
   }
-
 }
 

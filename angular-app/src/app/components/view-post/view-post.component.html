@@ -41,7 +41,10 @@
 </div> -->
 <app-navbar [currentUser]="user"></app-navbar>
 <div class="parent-container">
-  <div class="loader-container d-flex justify-content-center align-items-center" *ngIf="showLoader">
+  <div
+    class="loader-container d-flex justify-content-center align-items-center"
+    *ngIf="showLoader"
+  >
     <p-progressSpinner></p-progressSpinner>
   </div>
   <div class="container">
@@ -50,11 +53,19 @@
         <div class="post-container">
           <div class="row">
             <div class="col-md-6">
-              <img [src]="post.PhotoUrl" alt="Post Image" class="img-fluid post-image">
+              <img
+                [src]="post.PhotoUrl"
+                alt="Post Image"
+                class="img-fluid post-image"
+              />
             </div>
             <div class="col-md-6">
               <div class="post-header" *ngIf="user.Data != undefined">
-                <img [src]="user.Data?.photoUrl" alt="Profile Picture" class="profile-picture">
+                <img
+                  [src]="user.Data?.photoUrl"
+                  alt="Profile Picture"
+                  class="profile-picture"
+                />
                 <h4 class="username">{{ user.Data.Name }}</h4>
               </div>
               <div class="post-description">
@@ -64,15 +75,21 @@
                   </div>
                   <div class="like-wrapper">
                     <button class="like-button" (click)="toggleLike()">
-                      <i class="pi" [ngClass]="isLiked ? 'pi-heart' : 'pi-heart-fill'"></i>
+                      <i
+                        class="pi"
+                        [ngClass]="isLiked ? 'pi-heart' : 'pi-heart-fill'"
+                      ></i>
                       <span class="likes-count">{{ likesCount }}</span>
                     </button>
                   </div>
                 </div>
               </div>
-              <hr>
+              <hr />
               <div class="comments">
-                <div class="scrollable-comments" [style]="{ 'max-height': '200px', 'overflow-y': 'auto' }">
+                <div
+                  class="scrollable-comments"
+                  [style]="{ 'max-height': '200px', 'overflow-y': 'auto' }"
+                >
                   <div class="comment" *ngFor="let comment of comments">
                     <h5 class="username">{{ comment.UserName }}</h5>
                     <p class="comment-text">{{ comment.CommentStr }}</p>
@@ -81,8 +98,15 @@
               </div>
               <div class="add-comment">
                 <div class="d-flex align-items-center">
-                  <input type="text" class="form-control mr-2" placeholder="Add a comment" [(ngModel)]="comment.CommentStr">
-                  <button class="btn btn-success" (click)="onClickAddComment()">Post</button>
+                  <input
+                    type="text"
+                    class="form-control mr-2"
+                    placeholder="Add a comment"
+                    [(ngModel)]="comment.CommentStr"
+                  />
+                  <button class="btn btn-success" (click)="onClickAddComment()">
+                    Post
+                  </button>
                 </div>
               </div>
             </div>
@@ -92,4 +116,3 @@
     </div>
   </div>
 </div>
-

@@ -17,14 +17,12 @@ export class ViewPostService {
   collectionRefUser: CollectionReference<DocumentData> = collection(this.db, "users");
   collectionRefComment: CollectionReference<DocumentData> = collection(this.db, "comments");
 
-  //users : User[] = [];
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
   async getPostByID(id: string){
       const docRef = doc(this.collectionRef, id);
       const docSnap = await getDoc(docRef);
       return docSnap;
-
   }
 
   async getCommentByID(id: string){
