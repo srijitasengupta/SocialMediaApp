@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { EventEmitter, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DialogModule } from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,8 +26,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
-import { Subject } from 'rxjs';
-
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,13 +52,14 @@ import { Subject } from 'rxjs';
     HttpClientModule,
     MessageModule,
     ProgressSpinnerModule,
-    NgxFileDropModule
+    NgxFileDropModule,
+    OverlayPanelModule
   ],
   providers: [
     User,
     Post,
     Comment,
-    Subject
+    EventEmitter
   ],
   bootstrap: [AppComponent]
 })

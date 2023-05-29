@@ -5,6 +5,10 @@
     top: 60px;
 }
 
+.p-overlaypanel .p-overlaypanel-content{
+    padding: 0.5rem !important;
+  }
+
 @media only screen and (max-width: 600px) {
     .main-content{
         position: relative;

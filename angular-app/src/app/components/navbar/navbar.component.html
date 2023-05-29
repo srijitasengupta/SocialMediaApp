@@ -6,8 +6,8 @@
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item nav-profile dropdown">
-              <a class="nav-link dropdown-toggle" href="javascript: void(0)"[routerLink]="['/edit-profile',user.id]">
+            <li class="nav-item nav-profile ">
+              <a class="nav-link" href="javascript: void(0)"[routerLink]="['/edit-profile',user.id]">
                 <img [src]="user.Data?.photoUrl" alt="profile"/>
               </a>
              
@@ -62,7 +62,7 @@
       </nav>
       <div class="dialog">
         <p-dialog header="Header" [(visible)]="visible" (onHide)="closeDialog()" [style]="{width: '50%',height: '85%'}">
-            <app-edit-post [ID]="0" [postObj]="post"></app-edit-post>
+            <app-edit-post [ID]="0" [postObj]="post" (postCreated)="onPostCreation($event)"></app-edit-post>
         </p-dialog>
      </div>
  </div>

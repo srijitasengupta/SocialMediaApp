@@ -15,6 +15,7 @@ export class NavbarComponent {
 
 	@Input() currentUser: any;
 	visible: boolean = false;
+	parentElement: any;
 
 	constructor(
 		private auth: AuthService,
@@ -40,9 +41,11 @@ export class NavbarComponent {
 				this.getUserByID(id);
 		}
 
-		console.log("PPP")
-
 	}
+
+	ngAfterViewInit() {
+		this.parentElement = this.elementRef.nativeElement.querySelector('.parent-content') as HTMLElement;
+	  }
 
 	getUserByID(id: string) {
 		this.editProfileService.getUserByID(id).then(res => {
@@ -55,23 +58,17 @@ export class NavbarComponent {
 	}
 
 	showDialog(event: Event){
-		const element = this.elementRef.nativeElement.querySelector('.parent-content') as HTMLElement;
-		element.classList.add('dialog-clicked');
-		console.log(element)
+		this.parentElement.classList.add('dialog-clicked');
 		this.post = new Post();
 		this.visible = true;
-		console.log(this.post)
 	}
 	closeDialog(){
-		console.log("piiiii")
-		const element = this.elementRef.nativeElement.querySelector('.parent-content') as HTMLElement;
-		element.classList.remove('dialog-clicked');
-		console.log(element)
-		this.post.PhotoUrl=''
+		this.parentElement.classList.remove('dialog-clicked');
 		this.visible = false;
-		console.log(this.post);
-		
+	}
 
+	onPostCreation(event: any){
+		this.closeDialog();
 	}
 	
 

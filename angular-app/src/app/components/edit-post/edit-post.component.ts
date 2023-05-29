@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, SimpleChange } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output, SimpleChange } from '@angular/core';
 import { EditPostService } from './edit-post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/model/post.model';
@@ -14,7 +14,7 @@ export class EditPostComponent {
 	@Input() ID: any;
 	@Input() postObj: any;
 	isDragOver: boolean = false;
-
+	@Output() postCreated: EventEmitter<boolean> = new EventEmitter<boolean>()
 
 	constructor(
 		private auth: AuthService,
@@ -36,14 +36,12 @@ export class EditPostComponent {
 		if (changes?.postObj) {
 			this.post = this.postObj
 		}
-		console.log(this.post)
 	}
 	getPostByID(id: string) {
 		this.showLoader = true;
 		this.editPostService.getPostByID(id).then(res => {
 
 			this.post.ID = res.id;
-			console.log(res);
 			this.post.Data = res.data();
 			this.post = this.post.Data;
 			this.post.ID = res.id;
@@ -59,6 +57,7 @@ export class EditPostComponent {
 		this.editPostService.savePost(post);
 		this.showLoader = false;
 		this.router.navigate(['/my-feed']);
+		this.postCreated.emit(false);
 	}
 
 	async upload(path: any) {

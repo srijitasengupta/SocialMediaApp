@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { CollectionReference, collection, doc, getDoc, getFirestore, setDoc, DocumentData, deleteDoc } from 'firebase/firestore';
-import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -19,7 +18,7 @@ export class EditPostService {
 	constructor(
 		private fireauth: AngularFireAuth, 
 		private router: Router,
-		public postCreated: Subject<boolean> = new Subject<boolean>()
+		
 		) { }
 
 	async getPostByID(id: string) {
@@ -52,11 +51,9 @@ export class EditPostService {
       		this.showLoader = false;
 			
 			alert("Changes saved");
-			this.postCreated.next(false);
 		}
 		catch (err) {
 			alert(err);
-			this.postCreated.next(true);
 		}
 
 	}
