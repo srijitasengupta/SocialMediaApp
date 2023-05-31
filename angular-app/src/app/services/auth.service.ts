@@ -7,6 +7,7 @@ import type { DocumentData } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { User } from '../model/user.model';
+import { UtilsService } from './utils.service';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,12 @@ export class AuthService {
     db = getFirestore(this.app);
     showLoader = false;
 
-    constructor(private fireauth: AngularFireAuth, private router: Router) { }
+    constructor(
+        private fireauth: AngularFireAuth, 
+        private router: Router,
+        public utilsService: UtilsService
+
+        ) { }
 
     // login method
     async login(email: string, password: string) {
@@ -38,10 +44,10 @@ export class AuthService {
                 user.Data =docSnap.data();
             }
             this.showLoader = false;
-            alert('Login Successful!');
+            this.utilsService.handleSuccess('Login Successful!');
             this.router.navigate(['/community']);
         } catch (err) {
-            alert(err);
+            this.utilsService.handleError(err);
             this.router.navigate(['/register']);
         }
     }
@@ -68,11 +74,11 @@ export class AuthService {
             const docRef = doc(collectionRef, userid);
             await setDoc(docRef, data);
 
-            alert('Registration Successful');
+            this.utilsService.handleSuccess('Registration Successful');
             this.showLoader = false;
             this.router.navigate(['/community']);
         } catch (err) {
-            alert(err);
+            this.utilsService.handleError(err);
             this.router.navigate(['/register']);
         }
     }
@@ -82,8 +88,9 @@ export class AuthService {
         this.fireauth.signOut().then(() => {
             localStorage.removeItem('token');
             this.router.navigate(['/login']);
+            localStorage.removeItem('activeUser');
         }, err => {
-            alert(err.message);
+            this.utilsService.handleError(err.message);
         })
     }
 
@@ -114,7 +121,7 @@ export class AuthService {
                     }
                 },
                 (error) => {
-                    alert(error);
+                    this.utilsService.handleError(error.message);
                     reject(error);
                 },
                 () => {

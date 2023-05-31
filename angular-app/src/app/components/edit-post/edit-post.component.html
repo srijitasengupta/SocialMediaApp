@@ -15,9 +15,6 @@
             <div class="mb-3">
                 <textarea placeholder="Write something ...." name="caption" id="caption" class="custom-textarea" [(ngModel)]="post.Caption"></textarea>
                 <button class="btn btn-lg btn-warning" (click)="save(post)">Save</button>
-                <button *ngIf="post.ID != undefined" class="btn btn-lg btn-danger"
-                    (click)="onDeleteClick(post)">Delete</button>
-
             </div>
         </div>
     </div>

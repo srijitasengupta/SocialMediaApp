@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { CollectionReference, collection, doc, getDoc, getFirestore, setDoc, DocumentData, deleteDoc } from 'firebase/firestore';
+import { UtilsService } from 'src/app/services/utils.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,6 +19,7 @@ export class EditPostService {
 	constructor(
 		private fireauth: AngularFireAuth, 
 		private router: Router,
+		public utilsService: UtilsService
 		
 		) { }
 
@@ -50,27 +52,17 @@ export class EditPostService {
 			await setDoc(docRef, post.Data);
       		this.showLoader = false;
 			
-			alert("Changes saved");
+			if(post.ID!=undefined)
+				this.utilsService.handleSuccess("Changes saved");
+
+			else
+			this.utilsService.handleSuccess("Post Created");
 		}
 		catch (err) {
-			alert(err);
+			this.utilsService.handleError(err);
 		}
 
 	}
 
-	async deletePost(post: any){
-    this.showLoader = true;
-		console.log(post)
-		try {
-
-			let docRef = doc(this.collectionRef, post.ID);
-			await deleteDoc(docRef);
-      this.showLoader = false;
-			alert("Post deleted");
-
-		}
-		catch (err) {
-			alert(err);
-		}
-	}
+	
 }

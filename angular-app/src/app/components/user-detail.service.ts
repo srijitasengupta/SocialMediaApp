@@ -5,6 +5,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, setDoc, CollectionReference, query, where, getDocs, getDoc, DocumentData } from "firebase/firestore";
 import { User } from 'src/app/model/user.model';
 import { environment } from 'src/environments/environment';
+import { UtilsService } from '../services/utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,19 @@ export class UserDetailService {
   db = getFirestore(this.app);
   collectionRef: CollectionReference<DocumentData> = collection(this.db, "users");
   users: User[] = [];
-  constructor(private fireauth: AngularFireAuth, private router: Router) { }
+  constructor(
+    private fireauth: AngularFireAuth, 
+    private router: Router,
+    public utilsService: UtilsService
+    ) { }
 
   async saveUser(user: any) {
     try {
       const docRef = doc(this.collectionRef, user.id);
       await setDoc(docRef, user.Data);
-      alert("Changes saved");
+      this.utilsService.handleSuccess('Changes saved');
     } catch (err) {
-      this.router.navigate(['error-page'])
+      this.utilsService.handleError(err);
     }
   }
 

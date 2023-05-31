@@ -27,6 +27,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,13 +56,17 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     MessageModule,
     ProgressSpinnerModule,
     NgxFileDropModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    ConfirmDialogModule,
+    ToastModule
   ],
   providers: [
     User,
     Post,
     Comment,
-    EventEmitter
+    EventEmitter,
+    ConfirmationService,
+    MessageService,
   ],
   bootstrap: [AppComponent]
 })

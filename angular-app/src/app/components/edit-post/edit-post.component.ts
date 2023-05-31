@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
 	selector: 'app-edit-post',
 	templateUrl: './edit-post.component.html',
-	styleUrls: ['./edit-post.component.css']
+	styleUrls: ['./edit-post.component.css'],
 })
 export class EditPostComponent {
 
@@ -22,7 +22,7 @@ export class EditPostComponent {
 		private route: ActivatedRoute,
 		public post: Post,
 		private router: Router,
-		
+				
 	) { };
 
 	ngOnInit(): void {
@@ -69,11 +69,6 @@ export class EditPostComponent {
 			this.showLoader = false;
 	}
 
-	onDeleteClick(post: Post) {
-		this.editPostService.deletePost(post);
-		this.router.navigate(['/my-feed']);
-	}
-
 	@HostListener('dragover', ['$event'])
 	onDragOver(event: DragEvent): void {
 		event.preventDefault();
@@ -98,7 +93,6 @@ export class EditPostComponent {
 		const files = target.files as FileList;
 		this.upload(files[0])
 	}
-
 
 }
 

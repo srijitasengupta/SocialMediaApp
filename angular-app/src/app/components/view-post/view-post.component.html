@@ -1,5 +1,8 @@
 <app-navbar [currentUser]="user"></app-navbar>
 <div class="parent-container">
+	
+	<p-confirmDialog *ngIf="isDelete" [style]="{width: '50vw'}"></p-confirmDialog>
+										
 	<div class="loader-container d-flex justify-content-center align-items-center" *ngIf="showLoader">
 		<p-progressSpinner></p-progressSpinner>
 	</div>
@@ -57,10 +60,17 @@
 								<p-overlayPanel #op>
 									<ul class="edit-menu-items">
 										<li><a class="dropdown-item" href="javascript: void(0)" (click)="showDialog($event)">Edit</a></li>
-										<li><a class="dropdown-item" href="javascript: void(0)" (click)="onDeleteClick(post)">Delete</a></li>
+										<li class="dropdown-item"  (click)="onDeleteClick($event, post)">Delete</li>
+										
 									</ul>
 								</p-overlayPanel>
 						</div>
+						<div class="card flex justify-content-center gap-2">
+							
+							
+							
+						</div>
+						
 					</div>
 				</div>
 			</div>

@@ -55,9 +55,9 @@
 }
 .post-section .col-lg-4:hover .image-text{
   display: block;
-  width: 95%; 
-  height: 95%;
-  left: 10px;
+  width: 350px; 
+  height: 350px;
+  left: 15px;
 }
 .profile-photo {
   position: relative;
@@ -124,7 +124,7 @@ input :active{
 .post-section{
   border-top: 1px solid GREY;
   width: 95%;
-  
+  padding-right: 15px;
 }
 /* .post-section .row{
   margin: 20px;
@@ -132,16 +132,17 @@ input :active{
 .post-section .col-lg-4{
   padding: 0;
   margin: 0;
+  padding-left: 15px;;
+  margin-bottom: 15px;
   overflow: hidden;
   position: relative;
   }
-
 .post-section img{
-  width: 95%; 
-  height: 95%;
+  width: 350px; 
+  height: 350px;
+  margin-right: 15px;
   object-fit: cover;
   position: relative;
-  left: 10px;
   
   
 }

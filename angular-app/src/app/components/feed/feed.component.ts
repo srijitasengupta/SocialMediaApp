@@ -31,6 +31,7 @@ export class FeedComponent {
 
 
     this.id = localStorage.getItem('activeUser')?.toString();
+    this.showLoader=true;
 
     if (this.id != null)
       this.getUserByID(this.id);
@@ -62,13 +63,11 @@ export class FeedComponent {
     this.feedService.getPosts(this.userList).then(res => {
       this.postsList = res;
       console.log(this.postsList)
+      this.showLoader = false;
     }, err => {
       this.router.navigate(['error-page'])
     })
 
-  }
-  onCLickCreatePost() {
-    this.router.navigate(['/edit-post', '0'])
   }
 
   goToViewPost(post: any) {

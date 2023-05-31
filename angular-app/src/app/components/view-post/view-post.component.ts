@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/model/post.model';
 import { Comment } from 'src/app/model/comment.model';
 import { User } from 'src/app/model/user.model';
+import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
+import { UtilsService } from 'src/app/services/utils.service';
 
 declare var bootstrap: any;
 
@@ -24,6 +26,7 @@ export class ViewPostComponent {
 	visible: boolean = false;
 	parentElement: any;
 	id: any;
+	isDelete: boolean = false;
 
 	constructor(
 		private auth: AuthService,
@@ -33,7 +36,10 @@ export class ViewPostComponent {
 		public comment: Comment,
 		private router: Router,
 		public user: User,
-		private elementRef: ElementRef
+		private elementRef: ElementRef,
+		public confirmationService: ConfirmationService, 
+		public messageService: MessageService,
+		public utilsService: UtilsService
 	) { };
 
 	ngOnInit(): void {
@@ -157,10 +163,28 @@ export class ViewPostComponent {
 		this.closeDialog();
 	}
 
-	onDeleteClick(post: Post) {
-		this.viewPostService.deletePost(post);
-		this.router.navigate(['/my-feed']);
+	deletePost(post: Post) {
+		
+		
 	}
+
+	onDeleteClick(event:any,post: Post) {
+		console.log(event)
+		event.preventDefault();
+		this.isDelete = true;
+        this.confirmationService.confirm({
+            message: 'Are you sure you want to delete this post?',
+            header: 'Delete Post',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+				this.viewPostService.deletePost(post);
+                this.router.navigate(['/my-feed']);
+				//this.utilsService.handleSuccess('Post Deleted.')
+            },
+            reject: (type:any) => {
+            }
+        });
+    }
 }
 
 

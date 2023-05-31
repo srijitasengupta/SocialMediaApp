@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { CollectionReference, collection, doc, getDoc, getFirestore, addDoc, setDoc, DocumentData, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { User } from 'src/app/model/user.model';
+import { UtilsService } from 'src/app/services/utils.service';
 import { environment } from 'src/environments/environment';
 @Injectable({
 	providedIn: 'root'
@@ -18,7 +19,11 @@ export class ViewPostService {
 	collectionRefComment: CollectionReference<DocumentData> = collection(this.db, "comments");
 	showLoader = false;
 
-	constructor(private fireauth: AngularFireAuth, private router: Router) { }
+	constructor(
+		private fireauth: AngularFireAuth, 
+		private router: Router,
+		public utilsService: UtilsService
+		) { }
 
 	async getPostByID(id: string) {
 		const docRef = doc(this.collectionRef, id);
@@ -46,7 +51,7 @@ export class ViewPostService {
 			return docRef.id;
 		} catch (error) {
 			console.error("Error saving object:", error);
-			this.router.navigate(['error-page'])
+			this.utilsService.handleError(error);
 			throw error;
 		}
 	}
@@ -64,7 +69,7 @@ export class ViewPostService {
 		try {
 			const docRef = doc(this.collectionRef, postId);
 			await setDoc(docRef, post.Data);
-			alert("Changes saved");
+			this.utilsService.handleSuccess("Changes saved");
 			return docRef.id;
 		} catch (err) {
 			this.router.navigate(['error-page'])
@@ -86,11 +91,11 @@ export class ViewPostService {
 			let docRef = doc(this.collectionRef, post.ID);
 			await deleteDoc(docRef);
 			this.showLoader = false;
-			alert("Post deleted");
+			this.utilsService.handleSuccess('Post deleted.');
 
 		}
 		catch (err) {
-			alert(err);
+			this.utilsService.handleError(err)
 		}
 	}
 }

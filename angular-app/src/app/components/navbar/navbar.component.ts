@@ -70,6 +70,10 @@ export class NavbarComponent {
 	onPostCreation(event: any){
 		this.closeDialog();
 	}
+
+	logout(){
+		this.auth.logout();
+	}
 	
 
 }

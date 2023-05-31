@@ -5,6 +5,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, setDoc, CollectionReference, query, where, getDocs, getDoc, DocumentData } from "firebase/firestore";
 import { Post } from 'src/app/model/post.model';
 import { User } from 'src/app/model/user.model';
+import { UtilsService } from 'src/app/services/utils.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,7 +19,11 @@ export class EditProfileService {
     collectionRef: CollectionReference<DocumentData> = collection(this.db, "users");
 
     //users : User[] = [];
-    constructor(private fireauth: AngularFireAuth, private router: Router) { }
+    constructor(
+        private fireauth: AngularFireAuth, 
+        private router: Router,
+        public utilsService: UtilsService
+        ) { }
 
     async getUserByID(id: string){
         const docRef = doc(this.collectionRef, id);
@@ -33,10 +38,10 @@ export class EditProfileService {
             const docRef = doc(this.collectionRef, user.id);
             await setDoc(docRef, user.Data);
             this.showLoader = false;
-            alert("Changes saved");
+            this.utilsService.handleSuccess('Changes Saved.');
         }
         catch(err){
-            this.router.navigate(['error-page'])
+           this.utilsService.handleError(err);
         }
 
     }
