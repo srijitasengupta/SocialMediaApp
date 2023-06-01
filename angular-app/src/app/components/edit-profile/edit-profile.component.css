@@ -29,6 +29,10 @@
   display: inline-block;
 }
 
+.post-section{
+  padding-bottom: 30px;
+}
+
 .image-text {
   position: absolute;
   top: 0;
